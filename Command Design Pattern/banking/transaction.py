@@ -10,3 +10,5 @@ class Transaction(Protocol):
 
     def redo(self) -> None:
         ...
+
+
