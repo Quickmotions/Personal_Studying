@@ -24,7 +24,7 @@ This uses the past transactions list as the truth rather than the actual account
 meaning that everything that has occurred in the transactions totals up to the confirmed accurate data.#
 
 This uses a ledger which stores all transactions. undo and redo just move the current location in the
-ledger rather than actually undoing or redoing that command. When a new item is added the to ledger
+ledger rather than actually undoing or redoing that command. When a new item is added to the ledger
 all future transactions which were undone are deleted.
 
 When computing the final balances. only the transactions which are up to the current index of the ledger are
