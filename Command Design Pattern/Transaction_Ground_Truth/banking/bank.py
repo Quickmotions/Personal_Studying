@@ -2,7 +2,8 @@ import random
 import string
 from dataclasses import dataclass, field
 
-from banking.account import Account
+from Transaction_Ground_Truth.banking.account import Account
+
 
 @dataclass
 class Bank:
@@ -16,3 +17,7 @@ class Bank:
 
     def get_account(self, account_number: str) -> Account:
         return self.accounts[account_number]
+
+    def clear_cache(self):
+        for account in self.accounts.values():
+            account.clear_cache()

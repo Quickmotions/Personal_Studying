@@ -1,6 +1,6 @@
-from banking.bank import Bank
-from banking.controller import BankController
-from banking.commands import Deposit, Withdrawal, Transfer, Batch
+from State_Ground_Truth.banking.bank import Bank
+from State_Ground_Truth.banking.controller import BankController
+from State_Ground_Truth.banking.commands import Deposit, Withdrawal, Transfer, Batch
 
 
 def main() -> None:

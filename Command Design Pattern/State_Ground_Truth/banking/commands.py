@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
-from banking.account import Account
-from banking.transaction import Transaction
+from State_Ground_Truth.banking.account import Account
+from State_Ground_Truth.banking.transaction import Transaction
 
 
 @dataclass

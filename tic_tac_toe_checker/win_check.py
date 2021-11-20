@@ -19,7 +19,6 @@ def is_solved(board):
             index += 1
 
     for row in soln:
-
         for x in row:
             if x not in player_1:
                 break
@@ -36,7 +35,6 @@ def is_solved(board):
         return -1
     else:
         return 0
-
 
 
 # not yet finished
@@ -62,5 +60,3 @@ board = [[2, 1, 2],
          [2, 1, 1],
          [1, 2, 1]]
 print(is_solved(board))
-
-
