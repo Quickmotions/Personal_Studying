@@ -10,3 +10,8 @@ def pig_it(text):
         else:
             output += word + " "
     return output[:-1]
+
+
+def better_pig_it(text):
+    lst = text.split()
+    return ' '.join([word[1:] + word[:1] + 'ay' if word.isalpha() else word for word in lst])
