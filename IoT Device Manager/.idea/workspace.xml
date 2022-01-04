@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fad41051-9d4b-499e-8645-b40b4ffcef42" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Asynchronous IoT Device Manager/iot/devices.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Asynchronous IoT Device Manager/iot/message.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Asynchronous IoT Device Manager/iot/service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Asynchronous IoT Device Manager/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Asynchronous IoT Device Manager/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SearchText/SearchText.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Asynchronous IoT Device Manager/iot/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SearchText/readme.md" beforeDir="false" />
-    </list>
+    <list default="true" id="fad41051-9d4b-499e-8645-b40b4ffcef42" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,5 +71,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
