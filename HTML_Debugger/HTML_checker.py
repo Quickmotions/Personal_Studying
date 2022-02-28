@@ -1,13 +1,26 @@
 import time
 import re
+from dataclasses import dataclass
+from typing import TextIO
 
-filename = "HTML_file\\" + input("Enter filename: ") + ".html"
+@dataclass
+class debugger:
+    file_name: str
+    file_location: str
+    file: TextIO
 
-try:
-    f = open(filename, "r")
-except FileNotFoundError:
-    print("File Not Found --- Make sure you have placed the file into this directory")
-    exit()
+    def open_file(self):
+
+        self.file_name = input("Enter filename: ") + ".html"
+        self.file_location = "HTML_files\\" + self.file_name
+        try:
+            self.file = open(self.file_location, "r")
+        except FileNotFoundError:
+            print("File Not Found --- Make sure you have placed the file into this directory")
+            exit()
+
+
+
 
 print("Starting debugger...")
 time.sleep(0.3)
@@ -55,12 +68,12 @@ for line in f.readlines():
                 print(f"ERROR on line {line_num} of {filename} --- "
                       f"tried to open tag '{tag}' however tag '{tag}' on line {last_line} was already opened")
             tags[tag] = [True, line_num]
-
     # error for all unclosd tags
-    for tag in tags:
-        is_open, last_line = tags[tag]
-        if is_open:
-            print(f"ERROR on line {last_line} of {filename} --- "
-                  f"tag '{tag}' was opened but never closed")
+for tag in tags:
+    is_open, last_line = tags[tag]
+    if is_open:
+        print(f"ERROR on line {last_line} of {filename} --- "
+              f"tag '{tag}' was opened but never closed")
 
 print("---Finished Debugging---")
+f.close()
