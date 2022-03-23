@@ -35,6 +35,7 @@ class Debugger:
 
         return open_pos, close_pos
 
+    # TODO: Create multiple files and classes for each debug test
     def nested_tag_check(self):
         print("---Test 1---")
         print("Testing Nested Tags\n ----------\n")
@@ -85,8 +86,6 @@ class Debugger:
             if is_open:
                 print(f"ERROR on line {last_line} of {self.file_name} --- "
                       f"tag '{tag}' was opened but never closed")
-
-
 
     def test_surroundings(self, tag_name: str, surroundings: list, line_num: int = 1) -> None:
         # TODO: Improve the efficiency of this function
