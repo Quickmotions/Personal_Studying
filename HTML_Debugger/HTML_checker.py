@@ -19,42 +19,48 @@ class Debugger:
             print("File Not Found --- Make sure you have placed the file into this directory")
             exit()
         self.nested_tag_check()
+        self.test_tag_structure()
+        self.file.close()
+
+    @staticmethod
+    def collect_tags(line: str) -> tuple[list, list]:
+        open_pos = []
+        close_pos = []
+
+        for pos in range(len(line)):
+            if line[pos] == "<":
+                open_pos.append(pos)
+            if line[pos] == ">":
+                close_pos.append(pos)
+
+        return open_pos, close_pos
 
     def nested_tag_check(self):
         print("---Test 1---")
-        print("Testing for Handing nested tags\n ----------\n")
+        print("Testing Nested Tags\n ----------\n")
         time.sleep(0.1)
 
         # stores if tag is open and its line num
         line_num = 0
         tags = {}
 
-        # create a tree type list by putting stuff inside each other
-        # structure = <body><p>test</p><body><h1></h1>
-        # structure = [
-        #               ["<body>", ["<p>", []]],
-        #               ["<h1>, []]
-        #             ]
-
         for line in self.file.readlines():
             line_num += 1
-            open_pos = []
-            close_pos = []
-            for pos in range(len(line)):
-                if line[pos] == "<":
-                    open_pos.append(pos)
-                if line[pos] == ">":
-                    close_pos.append(pos)
+            open_pos, close_pos = self.collect_tags(line)
+
             if len(open_pos) != len(close_pos):
                 print(f"ERROR on line {line_num} of {self.file_name} --- uneven amount of '<>' in line")
                 continue
+
             for tag_pos in range(len(open_pos)):
                 tag = line[open_pos[tag_pos]:close_pos[tag_pos] + 1]
+                tag = self.configure_tag(tag)
+
                 closing_tag = False
                 if "/" in tag:
                     closing_tag = True
 
-                self.all_tags.append(tag)
+                self.all_tags.append([tag, line_num])
                 tag = re.sub('/', '', tag)  # remove / from tags
 
                 if tag not in tags:
@@ -80,26 +86,74 @@ class Debugger:
                 print(f"ERROR on line {last_line} of {self.file_name} --- "
                       f"tag '{tag}' was opened but never closed")
 
-        # TODO: Use this structure below to find illegally opened tags.
-        print(self.create_html_structure())
-        self.file.close()
 
-    def create_html_structure(self):
-        """creates and returns the tag structure of the html file"""
-        if len(self.all_tags) == 0:
-            return []
-        open_tag = self.all_tags[0]
 
-        # check next tag is instantly closed
-        if "<" + self.all_tags[1][2:] == open_tag and len(self.all_tags) > 2:
-            self.all_tags.remove("</" + open_tag[1:])
-            self.all_tags.remove(open_tag)
-            return [{open_tag: []}, self.create_html_structure()]
+    def test_surroundings(self, tag_name: str, surroundings: list, line_num: int = 1) -> None:
+        # TODO: Improve the efficiency of this function
 
-        # remove the outer tags and move rest of tags inside it
-        self.all_tags.remove("</" + open_tag[1:])
-        self.all_tags.remove(open_tag)
-        return {open_tag: self.create_html_structure()}
+        html_rules = {
+            "<body>": ["<html>"],
+            "<p>": ["<body>"],
+            "<head>": ["<html>"],
+            "<b>": ["<p>"],
+            "<br>": ["<p>"],
+            "<title>": ["<head>"],
+
+        }
+
+        for rule, restriction in html_rules.items():
+            if tag_name == rule:
+                if restriction not in surroundings:
+                    print(f"ERROR on line {line_num} of {self.file_name} --- "
+                          f"tag '{tag_name}' was opened before a '{restriction}' tag")
+
+    def test_tag_structure(self) -> None:
+        """Finds errors with tags opened in wrong context"""
+        print("---Test 2---")
+        print("Testing Tag Structure\n ----------\n")
+        time.sleep(0.1)
+
+        main_index = 0
+        for main_tag, line_num in self.all_tags:
+            # only check tag openers
+            if main_tag[1] == "/":
+                main_index += 1
+                continue
+
+            surrounding_tags = []
+            # find tags which main tag is inside of
+            opening_index = 0
+            for opening_tag, _ in self.all_tags[:main_index]:
+                if opening_index == main_index or opening_tag[1] == "/":
+                    opening_index += 1
+                    continue
+
+                # check if main tag in located inside
+                closing_tag = "</" + opening_tag[1:]
+                closing_index = 0
+
+                for tag, _ in self.all_tags[main_index:]:
+                    # find opening tags, closing equivalent
+                    if tag == closing_tag:
+                        surrounding_tags.append(opening_tag)
+                        break
+                    closing_index += 1
+                opening_index += 1
+            self.test_surroundings(main_tag, surrounding_tags, line_num)
+            main_index += 1
+
+    @staticmethod
+    def configure_tag(tag: str) -> str:
+        """formats tags"""
+        tag = tag.lower()
+
+        # remove optional tag args
+        tag = tag.split(" ", maxsplit=1)
+        if len(tag) > 1:
+            tag = tag[0] + ">"
+        else:
+            tag = tag[0]
+        return tag
 
 
 def main():
@@ -111,4 +165,5 @@ def main():
     print("\n---Finished Debugging---")
 
 
-main()
+if __name__ == "__main__":
+    main()
