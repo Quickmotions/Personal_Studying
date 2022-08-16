@@ -16,9 +16,7 @@ def tree_by_levels(node):
     list_by_levels = []
     if node is None:
         return list_by_levels
-
     current_tree = [node]
-
     while True:
         new_node = []
         for node_part in current_tree:
