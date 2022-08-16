@@ -17,35 +17,25 @@ def tree_by_levels(node):
     if node is None:
         return list_by_levels
 
-    current_node = [node]
-    new_node = []
-    for node_part in current_node:
-        for side in [node_part.right, node_part.left]:
-            print(f"side : {side.value}")
-            if side.value is not None:
-                list_by_levels.append(side.value)
-            new_node.append(node_part.right)
-            new_node.append(node_part.left)
-        current_node = new_node
-        new_node = []
-        print(f"New node: {current_node}")
+    current_tree = [node]
 
+    while True:
+        new_node = []
+        for node_part in current_tree:
+            if node_part is not None:
+                list_by_levels.append(node_part.value)
+                new_node.append(node_part.left)
+                new_node.append(node_part.right)
+        for node_part in current_tree:
+            if node_part is not None:
+                break
+        else:
+            break
+        current_tree = new_node
     return list_by_levels
 
 
 print(tree_by_levels(None))
 # should equal []
-print(
-    tree_by_levels(
-        Node(
-            Node(None,
-                 Node(None, None, 4),
-                 2),
-            Node(
-                Node(None, None, 5),
-                Node(None, None, 6),
-                3),
-            1)
-        )
-    )
+print(tree_by_levels(Node(Node(None, Node(None, None, 4), 2), Node(Node(None, None, 5), Node(None, None, 6), 3), 1)))
 # Should equal [1, 2, 3, 4, 5, 6]
