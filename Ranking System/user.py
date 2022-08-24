@@ -17,7 +17,7 @@ class User:
         elif act_rank == self.rank_minus_one():
             self.progress += 1
         elif act_rank not in [-1, -2, -3, -4, -5, -6, -7, -8, 1, 2, 3, 4, 5, 6, 7, 8]:
-            raise Exception
+            raise ValueError("Rank must be in range [-8,-1]U[1,8]")
         elif act_rank > self.rank != 8:
             if act_rank > 0 and self.rank < 0:
                 act_rank -= 1
