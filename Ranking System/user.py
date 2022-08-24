@@ -29,29 +29,3 @@ class User:
         if self.rank >= 8:
             self.rank = 8
             self.progress = 0
-
-
-# tests
-user = User()
-print(user.rank)
-
-user.inc_progress(-2)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(-5)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(7)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(4)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(-1)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(7)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(7)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(-6)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(-4)
-print(f"rank: {user.rank} progress: {user.progress}")
-user.inc_progress(2)
-print(f"rank: {user.rank} progress: {user.progress}")
