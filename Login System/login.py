@@ -2,6 +2,7 @@
 import pickle
 
 
+# TODO: combine with old GUI based login system
 class User:
     def __init__(self, username: str, password: str):
         self.username = username
@@ -43,9 +44,9 @@ class Program:
             option_str += f"{num} | {option}\n"
             num += 1
         choice = int(input(f"{option_str}\nChoice: "))
-        if self.options[choice-1] == "login":
+        if self.options[choice - 1] == "login":
             self.login()
-        if self.options[choice-1] == "register":
+        if self.options[choice - 1] == "register":
             self.register()
 
     def register(self):
