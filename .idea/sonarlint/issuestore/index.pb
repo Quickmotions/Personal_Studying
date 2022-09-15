@@ -11,3 +11,11 @@ I
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 R
 "PickleStorage/DataStoragePickle.py,3\a\3a93d03007d103dada8e612950b2b2ac99629849
+E
+Login System/login.py,e\e\ee24357eb03d56128ceca91daeff07d31007c977
+P
+ Square into Squares/decompose.py,5\b\5b9b74523f9c756b3f17705cc91c04e4540d31be
+J
+WordCounter/top_3_words.py,7\3\732e761201551401ff69330db9769f6ba0de177f
+B
+ASCII X/program.py,6\5\6562ca804e090791371509c33c28497c02fd66fe
